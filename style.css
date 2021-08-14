@@ -1,0 +1,42 @@
+.main{
+	height: 100%;
+	display: flex; 
+	justify-content: center;
+	align-self: center;
+}
+.move {
+	height: 10%; 
+	width: 10%;   
+  	background-color: red;
+    position: relative;
+    animation: ;
+	}
+
+@keyframes right-left {
+    0%       { transform: translatex(0%)  }
+    100%     { transform: translateX(-630%) }
+}
+@keyframes left-right {
+    0%       { transform: translatex(-1260%)  }
+    100%     { transform: translateX(-760%) }
+}
+
+@keyframes battle {
+    0%       { transform: translatex(-301%)  }
+    10%, 90% {
+    transform: translatex(-351px);
+  	}
+  
+  	20%, 80% {
+    transform: translatex(-349px);
+	}
+
+  	30%, 50%, 70% {
+    transform: translatex(-354px);
+  	}
+
+  	40%, 60% {
+    transform: translatex(-348px);
+  	}
+  	100% {transform: translateX(-351px)}
+}
