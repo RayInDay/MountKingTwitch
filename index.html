@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>	</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js" id="socketIo"></script>
+</body>
+<script type="text/javascript">
+var queue=[]
+
+				socket = io('wss://socket.donationalerts.ru:443', {
+				reconnection: true,
+				reconnectionDelayMax: 5000,
+				reconnectionDelay: 1000,
+			});
+		
+	
+
+			socket.emit('add-user', { token: token, type: 'alert_widget' });
+			
+
+		socket.on('donation', function(msg){
+		console.log(msg)
+			var configtype = msg.split('alert_type\":')
+			
+            configtype =configtype[1].split(',',1)
+   			configtype=configtype[0]
+    		configtype= configtype.replace(" ",'')
+   			configtype= configtype.replaceAll('"','')
+    	console.log(configtype)
+    
+			var	subPlan= msg.split('sub_plan\\\":\\"')
+	
+			subPlan= subPlan[1].split('\",',1)
+			subPlan=subPlan[0]
+			subPlan= subPlan.replace(" ",'')
+    		subPlan= subPlan.replaceAll('"','')
+    		subPlan= subPlan.replaceAll('\\','')
+    
+			subPlan= subPlan/1000;
+				var	username =msg.split('username":"',2)
+			username=username[1].split('",',1)
+			username=username[0]
+				var months_in_a_row =msg.split('months_in_a_row\\\":')
+			months_in_a_row=months_in_a_row[1].split(',\\\"',1)
+			months_in_a_row=months_in_a_row[0]
+		Player= {}
+		Player.username =username
+		Player.subPlan= subPlan
+		Player.mounths=months_in_a_row
+		
+			queue.push(Player)
+			console.log(Player)
+	  console.log(username +" was subed "+ subPlan +" Tier"+" by "+months_in_a_row);
+	
+			});
+</script>
+</html>
