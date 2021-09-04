@@ -1,19 +1,32 @@
 .main{
+
+	margin-top: 5%;
 	height: 100%;
 	display: flex; 
 	justify-content: center;
 	align-self: center;
 }
+@font-face {
+  font-family: Acron;
+  src: url(Images/Acrom-Regular.woff);
+}
+
+span{
+	font-family: Acron;
+	font-size: 2em;
+}
 .move {
-	height: 10%; 
-	width: 10%;   
-  	background-color: red;
+	text-align: center;
+	align-items: center;
+	height: 10em; 
+	width: 10em;
     position: absolute;
     animation: ;
 	}
 
+
 @keyframes left-right {
-    0%       { transform: translatex(-630%)  }
+    0%       { transform: translatex(630%)  }
     100%     { transform: translateX(0%) }
 }
 
@@ -35,4 +48,21 @@
     transform: translatex(-348px);
   	}
   	100% {transform: translateX(-351px)}
+}
+
+@keyframes lose {
+    0%       { transform: translatex(630%)  }
+    100%     { transform: translateX(-630%) }
+}
+
+@keyframes win {
+    0%       { transform: translatex(630%)  }
+    25%		 {	transform: translateX(0%)   }
+    100%	{ transform: translate(-190%,250%) }
+}
+@keyframes first-jump {
+    0%       { transform: translatex(630%)  }
+    25%		 {	transform: translateX(0%)   }
+    100%	{ transform: translate(-190%,250%) }
+}
 }

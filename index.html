@@ -9,26 +9,32 @@
 <body>
 <div class="main">
 
-	<img src="Images/Mountain.png" style="width: 50%; height: 50%;" />
+	<img src="Images/Mountain.png" style="width: 50%; height: 50%; margin-top: 6%;" />
 
-	<div class="move" style="height: 4em; width: 4em; ">
-  <span id="Pretender1">
+	<div class="move" >
+  <span>
   	100
-    <img alt="Pretender1">
   </span>
+
+	<span id="NamePretender1">
+  	Name 
+  </span>
+
+  <img id="Pretender1" src="Images/IdleAnimation.gif" style="height: 8em; width: 8em;" name="Pretender1" alt="Pretender1">
 </div>
 
-<div class="move" style="height: 4em; width: 4em; ">
-  <span id="Pretender2" style=" ">
-  	100
-    <img src="" alt="Pretender2" style="height: 4em; width: 4em;">
+<div class="move" >
+  <span>
+  	100   
   </span>
+
+  <img id="Pretender2" src="Images/AtackerAnimation.gif" name="Pretender2" alt="Pretender2" style="height: 8em; width: 8em; ">
 </div>
 
 
 	
 </div>
-	   <button onclick="EnemyAnimtion()">StartAnimation</button>
+	   <button onclick="StartAnimation()">StartAnimation</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="config.js"></script>
