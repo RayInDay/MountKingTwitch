@@ -1,16 +1,20 @@
-function StartAnimation(){
-	document.getElementsByClassName("move")[0].style.animation = "right-left 3s ease-in-out forwards";
-
-
-}
 function EnemyAnimtion() {
 		document.getElementsByClassName("move")[1].style.animation = "left-right 3s ease-in-out forwards"; 
-		document.getElementsByClassName("move")[0].style.animation = "battle 2s ease-in-out forwards"; 
+
+Battle();
+
 }
+var Pretender1 = document.getElementById('Pretender1').innerText;
+var Pretender2 = document.getElementById('Pretender2').innerText;
 
 function Battle() {
-	if (true) 
+	if (Pretender1 > Pretender2) 
 	{
-	EnemyAnimtion();
+document.getElementsByClassName("move")[0].style.animation = "battle 2s ease-in-out forwards"; 
+	} 
+	else 
+	{
+
+console.log(Pretender1)
 	}
 }

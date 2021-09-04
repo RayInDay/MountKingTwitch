@@ -8,17 +8,13 @@
 	height: 10%; 
 	width: 10%;   
   	background-color: red;
-    position: relative;
+    position: absolute;
     animation: ;
 	}
 
-@keyframes right-left {
-    0%       { transform: translatex(0%)  }
-    100%     { transform: translateX(-630%) }
-}
 @keyframes left-right {
-    0%       { transform: translatex(-1260%)  }
-    100%     { transform: translateX(-760%) }
+    0%       { transform: translatex(-630%)  }
+    100%     { transform: translateX(0%) }
 }
 
 @keyframes battle {
