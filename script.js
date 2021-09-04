@@ -1,20 +1,52 @@
-function EnemyAnimtion() {
-		document.getElementsByClassName("move")[1].style.animation = "left-right 3s ease-in-out forwards"; 
+var CurrentChampion= {}
+CurrentChampion.Hp= 0;
+CurrentChampion.Name="";
+function StartAnimation(){
+	document.getElementsByClassName("move")[0].style.animation = "right-left 3s ease-in-out forwards";
 
-Battle();
 
 }
-var Pretender1 = document.getElementById('Pretender1').innerText;
-var Pretender2 = document.getElementById('Pretender2').innerText;
+function EnemyAnimtion() {
+		document.getElementsByClassName("move")[1].style.animation = "left-right 3s ease-in-out forwards"; 
+		document.getElementsByClassName("move")[0].style.animation = "battle 2s ease-in-out forwards"; 
+}
 
+async function QueueWorker(){
+while(queue.length!=0){
+let Player= queue.shift();
+if (CurrentChampion.Name=="") {
+	SetChamp(Player);
+	console.log(CurrentChampion);
+	continue;
+}
+if(CurrentChampion.Name!=Player.username){
+	Damage(Player);
+	console.log(CurrentChampion);
+}
+else{
+	Heal(Player);
+	console.log(CurrentChampion);
+}
+	
+	
+}
+function SetChamp(Player) {
+	CurrentChampion.Name=Player.username;
+	CurrentChampion.Hp= Player.subPlan;
+}
+function Damage(oponent) {
+	CurrentChampion.Hp-=oponent.subPlan;
+	if(CurrentChampion.Hp<=0){
+		SetChamp(oponent);
+	}
+}
+function Heal(healer) {
+	CurrentChampion.Hp+=healer.subPlan;	
+}
+}
 function Battle() {
-	if (Pretender1 > Pretender2) 
+	if (true) 
 	{
-document.getElementsByClassName("move")[0].style.animation = "battle 2s ease-in-out forwards"; 
-	} 
-	else 
-	{
-
-console.log(Pretender1)
+	EnemyAnimtion();
 	}
 }

@@ -32,11 +32,12 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="config.js"></script>
-<script type="text/javascript" src="script.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js" id="socketIo"></script>
 </body>
 <script type="text/javascript">
 var queue=[]
+var Player= {}
 
 				socket = io('wss://socket.donationalerts.ru:443', {
 				reconnection: true,
@@ -71,18 +72,31 @@ var queue=[]
 				var	username =msg.split('username":"',2)
 			username=username[1].split('",',1)
 			username=username[0]
-				var months_in_a_row =msg.split('months_in_a_row\\\":')
-			months_in_a_row=months_in_a_row[1].split(',\\\"',1)
-			months_in_a_row=months_in_a_row[0]
-		Player= {}
+			if(msg.includes("multi_month_duration\\")){
+				var multi_month_duration =msg.split('multi_month_duration\\\"')
+				multi_month_duration=multi_month_duration[1].split('",',1)
+			multi_month_duration=multi_month_duration[0]
+			}
+			if(msg.includes('is_gift\\\"\:true')){
+				Player.subPlan= subPlan	
+			}
+			else{
+				if (multi_month_duration>0&&multi_month_duration!=null) {
+					Player.subPlan= subPlan* multi_month_duration;}
+				else{
+					Player.subPlan= subPlan	}
+			}
+			
+
 		Player.username =username
-		Player.subPlan= subPlan
-		Player.mounths=months_in_a_row
 		
-			queue.push(Player)
-			console.log(Player)
-	  console.log(username +" was subed "+ subPlan +" Tier"+" by "+months_in_a_row);
+		
+			queue.push(Player);
+			QueueWorker();
+	  console.log(username +" was scoored "+ Player.subPlan+ " as "+subPlan+"* ["+ multi_month_duration+ "]");
 	
 			});
+
 </script>
+<script type="text/javascript" src="script.js"></script>
 </html>
