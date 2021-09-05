@@ -8,14 +8,35 @@
 </head>
 <body>
 <div class="main">
-	<img src="Images/Mountain.png" style="width: 50%; height: 50%;" />
-	<img  class="move" style=" height: 4em; width: 4em;" alt="Pretender1">
-	<img  class="move" style=" height: 4em; width: 4em;" alt="Pretender2">
-</div>
-	  <button onclick="StartAnimation()">blue</button>
-	   <button onclick="EnemyAnimtion()">yellow</button>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
+	<img src="Images/Mountain.png" style="width: 50%; height: 50%; margin-top: 6%;" />
+
+	<div class="move" >
+  <span>
+  	100
+  </span>
+
+	<span id="NamePretender1">
+  	Name 
+  </span>
+
+  <img id="Pretender1" src="Images/IdleAnimation.gif" style="height: 8em; width: 8em;" name="Pretender1" alt="Pretender1">
+</div>
+
+<div class="move" >
+  <span>
+  	100   
+  </span>
+
+  <img id="Pretender2" src="Images/AtackerAnimation.gif" name="Pretender2" alt="Pretender2" style="height: 8em; width: 8em; ">
+</div>
+
+
+	
+</div>
+	   <button onclick="StartAnimation()">StartAnimation</button>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="config.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js" id="socketIo"></script>
