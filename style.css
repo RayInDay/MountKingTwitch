@@ -62,7 +62,6 @@ span{
 }
 @keyframes first-jump {
     0%       { transform: translatex(630%)  }
-    25%		 {	transform: translateX(0%)   }
-    100%	{ transform: translate(-190%,250%) }
+    100%	{  transform:translate(0%,30%);   } }
 }
 }
