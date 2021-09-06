@@ -56,8 +56,8 @@ function Damage(oponent) {
 	
 	CurrentChampion.Hp-=oponent.subPlan;
 
-	if(CurrentChampion.Hp<=0){
-
+	if(CurrentChampion.Hp<=0)
+	{
 		SetChamp(oponent);
 	}
 
@@ -70,6 +70,26 @@ function Heal(healer) {
 
 }
 
+function Lose()
+{
+	Pretender2.src = FlyAnimation;	
+	document.getElementsByClassName("move")[1].style= "display: block";
+	document.getElementsByClassName("move")[1].style.animation = "lose 3s ease-in-out forwards"
+
+	setTimeout("document.getElementsByClassName('move')[1].style= 'display: none'",3000);
+}
+
+function Win()
+{
+	setTimeout("document.getElementsByClassName('move')[0].style= 'display: none'",2000);
+
+	Pretender2.src = AtackerAnimation;	
+	document.getElementsByClassName("move")[1].style= "display: block";
+	
+	document.getElementsByClassName('move')[1].style.animation = 'win 3s ease-in-out forwards'
+	
+	setTimeout("document.getElementsByClassName('move')[0].style= 'display: block'",3000);
+}
 
 function SetIdeal() {
 	Pretender1.src=IdleAnimation;
@@ -84,7 +104,8 @@ function SetFirst(Player) {
 	//SetChamp(Player);
 	 SetName(CurrentChampion);
 	 SetHP(CurrentChampion);
-	document.getElementsByClassName("move")[0].style= "display: block";
+
+	document.getElementsByClassName("move")[0].style= "display: inline-grid;";
 	document.getElementsByClassName("move")[1].style= "display: none";
 	console.log(CurrentChampion);
 	

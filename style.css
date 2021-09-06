@@ -1,5 +1,4 @@
 .main{
-
 	margin-top: 5%;
 	height: 100%;
 	display: flex; 
@@ -30,35 +29,16 @@ span{
     100%     { transform: translateX(0%) }
 }
 
-@keyframes battle {
-    0%       { transform: translatex(-301%)  }
-    10%, 90% {
-    transform: translatex(-351px);
-  	}
-  
-  	20%, 80% {
-    transform: translatex(-349px);
-	}
-
-  	30%, 50%, 70% {
-    transform: translatex(-354px);
-  	}
-
-  	40%, 60% {
-    transform: translatex(-348px);
-  	}
-  	100% {transform: translateX(-351px)}
-}
-
 @keyframes lose {
-    0%       { transform: translatex(630%)  }
-    100%     { transform: translateX(-630%) }
+    0%       { transform: translate(-590%,-250%)  }
+    50%       { transform: translate(0%,30%)  }
+    100%     { transform: translate(400%,450%) }
 }
 
 @keyframes win {
-    0%       { transform: translatex(630%)  }
-    25%		 {	transform: translateX(0%)   }
-    100%	{ transform: translate(-190%,250%) }
+    0%       { transform: translate(-590%,-250%)  }
+    50%,75%      { transform: translate(0%,30%)  }
+    100%     { transform: translate(400%,450%) }
 }
 @keyframes first-jump {
     0%       { transform: translatex(630%)  }
