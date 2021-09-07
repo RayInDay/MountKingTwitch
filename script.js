@@ -2,15 +2,16 @@ var CurrentChampion= {}
 CurrentChampion.Hp= 10;
 CurrentChampion.Name="Basic";
 
-var IdleAnimation = "Images/IdleAnimation.gif";
-var AtackerAnimation = "Images/AtackerAnimation.gif";
+var IdleAnimation = "Images/IdleAnimation (2).gif";
+var AtackerAnimation = "Images/AtackerAnimation (2).gif";
 var AttackerEmptyAnimation = "Images/AttackerEmptyAnimation.gif";
-var HealAnimation = "Images/EatingAnimation.gif";
-var FlyAnimation = "Images/FlyAnimation.gif";
+var HealAnimation = "Images/EatingAnimation (2).gif";
+var FlyAnimation = "Images/win.png";
 
 var Pretender1 = document.querySelector("#Pretender1");
 var Pretender2 = document.querySelector("#Pretender2");
 Pretender1.src = IdleAnimation;
+
 
 function StartAnimation(){
 		Pretender1.src = HealAnimation;
@@ -23,7 +24,8 @@ function EnemyAnimtion() {
 		document.getElementsByClassName("move")[0].style.animation = "battle 2s ease-in-out forwards"; 
 }
 
-async function QueueWorker(){
+/*async function QueueWorker(){
+	while(true){
 while(queue.length!=0){
 let Player= queue.shift();
 if (CurrentChampion.Name=="") {
@@ -39,8 +41,8 @@ else{
 	console.log(CurrentChampion);
 }
 	SetHP();
-	
-}}
+	}
+}}*/
 
 function SetHP() {
 	
@@ -81,14 +83,14 @@ function Lose()
 
 function Win()
 {
-	setTimeout("document.getElementsByClassName('move')[0].style= 'display: none'",2000);
+	setTimeout("document.getElementsByClassName('move')[0].style= 'display: none' ",2000);
 
 	Pretender2.src = AtackerAnimation;	
 	document.getElementsByClassName("move")[1].style= "display: block";
 	
 	document.getElementsByClassName('move')[1].style.animation = 'win 3s ease-in-out forwards'
 	
-	setTimeout("document.getElementsByClassName('move')[0].style= 'display: block'",3000);
+	setTimeout("document.getElementsByClassName('move')[0].style= 'display: block' ",3000);
 }
 
 function SetIdeal() {
@@ -113,9 +115,16 @@ function SetFirst(Player) {
 function SetFirstPlayer(Player) {
 document.getElementsByClassName("move")[1].style= "display: block"
 document.getElementsByClassName("move")[1].style.animation = "first-jump 1s ease-in-out forwards"; 
-setTimeout(()=>SetFirst(Player), 5000);
+setTimeout(()=>SetFirst(Player), 1300);
 }
 document.getElementsByClassName("move")[1].style= "display: block"
 document.getElementsByClassName("move")[1].style.animation = "first-jump 1s ease-in-out forwards"; 
-setTimeout(()=>SetFirst(CurrentChampion), 5000);
+setTimeout(()=>SetFirst(CurrentChampion), 1300);
 
+QueueWorker();
+function AddPlayer(){
+	let Player= {};
+	Player.username="sckdpocks";
+	Player.subPlan=4;
+	queue.push(Player);
+}

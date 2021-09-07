@@ -14,11 +14,17 @@ span{
 	font-family: Acron;
 	font-size: 2em;
 }
+.players{
+	height: 5em; 
+	width: 5em; 
+	transform: scale(10); 
+	margin-top: 120px;
+}
 .move {
 	text-align: center;
 	align-items: center;
-	height: 10em; 
-	width: 10em;
+	height: 5em; 
+	width: 5em;
     position: absolute;
     animation: ;
 	}
@@ -29,19 +35,20 @@ span{
     100%     { transform: translateX(0%) }
 }
 
-@keyframes lose {
-    0%       { transform: translate(-590%,-250%)  }
-    50%       { transform: translate(0%,30%)  }
-    100%     { transform: translate(400%,450%) }
+@keyframes win {
+    0%       { transform: translate(-790%,-450%)  }
+    50%       { transform: translate(0%,100%) }
+    100%     { transform: translate(800%,850%)  rotateZ(720deg) }
 }
 
-@keyframes win {
-    0%       { transform: translate(-590%,-250%)  }
-    50%,75%      { transform: translate(0%,30%)  }
-    100%     { transform: translate(400%,450%) }
+@keyframes lose {
+    0%       { transform: translate(-790%,-450%) scale(0.15)  }
+    50%,75%      { transform: translate(0%,55%) scale(0.15) }
+    100%     { transform: translate(800%,850%)	scale(0.15) }
 }
 @keyframes first-jump {
     0%       { transform: translatex(630%)  }
-    100%	{  transform:translate(0%,30%);   } }
+    100%	{  transform:translate(0%,55%);   } }
 }
+
 }
