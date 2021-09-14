@@ -121,10 +121,15 @@ document.getElementsByClassName("move")[1].style= "display: block"
 document.getElementsByClassName("move")[1].style.animation = "first-jump 1s ease-in-out forwards"; 
 setTimeout(()=>SetFirst(CurrentChampion), 1300);
 
-QueueWorker();
-function AddPlayer(){
+/*QueueWorker();
+*/function AddPlayer(){
 	let Player= {};
 	Player.username="sckdpocks";
 	Player.subPlan=4;
 	queue.push(Player);
+	window.localStorage.setItem("username", Player.username)
+	window.localStorage.setItem("subPlan", Player.subPlan)
+	
+	document.worker.postMessage(queue);
+
 }

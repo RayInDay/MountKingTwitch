@@ -33,6 +33,7 @@
 	   <button onclick="Heal()">StartAnimation</button>
 	   <button onclick="Lose()">Lose</button>
 	   <button onclick="Win()">Win</button>
+	   <button onclick="AddPlayer()">Queue</button>
 	   
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -40,12 +41,48 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js" id="socketIo"></script>
 </body>
+
+<script type="text/js-worker">
+	onmessage = function (e)
+{
+
+while(e.data.length < 1000)
+		{
+				if (e.data.length > 0) 
+				{
+					for(var i = 0; i< e.data.length; i++)
+					{
+						console.log(e.data[i].username)
+					}
+				} 
+		}
+}
+</script>
 <script type="text/javascript">
 var queue=[]
-var Player= {'Nikulyonok',5}
+var Player= {username: "Nika"}
+Player.username = "Nika"
 
 
-				socket = io('wss://socket.donationalerts.ru:443', {
+ document.worker = new Worker(window.URL.createObjectURL(new Blob(Array.prototype.map.call(document.querySelectorAll('script[ type= \'text\/js-worker\']'),function (oScript){return oScript.textContent;}),{type: 'text/javascript'})));
+
+window.onbeforeunload = function(){
+	document.worker.terminate();
+}
+
+		window.onload = function(){
+			(function() {
+  if(window.localStorage)
+    console.log("Local Storage Supported")
+  else
+    console.log("Local Storage Not Supported")
+})();
+
+	
+
+		}
+
+				/*socket = io('wss://socket.donationalerts.ru:443', {
 				reconnection: true,
 				reconnectionDelayMax: 5000,
 				reconnectionDelay: 1000,
@@ -94,15 +131,16 @@ var Player= {'Nikulyonok',5}
 			}
 			
 
-		Player.username =username
+		Player.username = username
 		
 		
 			queue.push(Player);
-			QueueWorker();
 	  console.log(username +" was scoored "+ Player.subPlan+ " as "+subPlan+"* ["+ multi_month_duration+ "]");
 	
 			});
-
+*/
 </script>
 <script type="text/javascript" src="script.js"></script>
+
+
 </html>
