@@ -45,14 +45,15 @@
 <script type="text/js-worker">
 	onmessage = function (e)
 {
-
+				console.log(e.data.length)
 while(e.data.length < 1000)
 		{
+			
 				if (e.data.length > 0) 
 				{
-					for(var i = 0; i< e.data.length; i++)
+					for(var i = 0; i < e.data.length; i++)
 					{
-						console.log(e.data[i].username)
+						console.log(e.data[i].length)
 					}
 				} 
 		}
@@ -64,7 +65,9 @@ var Player= {username: "Nika"}
 Player.username = "Nika"
 
 
- document.worker = new Worker(window.URL.createObjectURL(new Blob(Array.prototype.map.call(document.querySelectorAll('script[ type= \'text\/js-worker\']'),function (oScript){return oScript.textContent;}),{type: 'text/javascript'})));
+ document.worker = new Worker(window.URL.createObjectURL(new Blob(Array.prototype.map.call(document.querySelectorAll('script[ type= \'text\/js-worker\']'),
+
+ 	function (oScript){return oScript.textContent;}),{type: 'text/javascript'})));
 
 window.onbeforeunload = function(){
 	document.worker.terminate();

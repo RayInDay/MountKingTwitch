@@ -123,13 +123,23 @@ setTimeout(()=>SetFirst(CurrentChampion), 1300);
 
 /*QueueWorker();
 */function AddPlayer(){
-	let Player= {};
-	Player.username="sckdpocks";
-	Player.subPlan=4;
-	queue.push(Player);
-	window.localStorage.setItem("username", Player.username)
-	window.localStorage.setItem("subPlan", Player.subPlan)
-	
-	document.worker.postMessage(queue);
+
+	let Player= {}
+	Player.username = "sckd1pocks";
+	Player.subPlan = 4;
+
+let name = Player.username;
+localStorage.setItem(name, JSON.stringify(Player))
+
+var val = (localStorage)
+ let key
+for(let i=0; i<localStorage.length; i++) {
+   key = localStorage.key(i);
+  /*console.log( `${key}: ${localStorage.getItem(key)}`);*/
+
+}
+			    document.worker.postMessage(JSON.stringify(val))
+/*				console.log(JSON.parse(JSON.stringify(val.length)))
+*/
 
 }
