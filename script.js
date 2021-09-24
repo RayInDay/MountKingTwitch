@@ -125,21 +125,27 @@ setTimeout(()=>SetFirst(CurrentChampion), 1300);
 */function AddPlayer(){
 
 	let Player= {}
-	Player.username = "sckd1pocks";
+	Player.username = "sckd1pocks1";
 	Player.subPlan = 4;
 
 let name = Player.username;
-localStorage.setItem(name, JSON.stringify(Player))
 
+localStorage.setItem(Player, JSON.stringify(Player))
+
+let queue = []
+queue.push(Player)
+
+console.log(queue)
 var val = (localStorage)
- let key
+//TODO: Create implementation of queue with autoimplemeting player value if he donate more tham once 
+
 for(let i=0; i<localStorage.length; i++) {
    key = localStorage.key(i);
-  /*console.log( `${key}: ${localStorage.getItem(key)}`);*/
+  console.log( `${key}: ${localStorage.getItem(key)}`);
 
 }
-			    document.worker.postMessage(JSON.stringify(val))
-/*				console.log(JSON.parse(JSON.stringify(val.length)))
-*/
+			   // document.worker.postMessage(JSON.stringify(val))
+				console.log(JSON.parse(JSON.stringify(val.length)))
+
 
 }

@@ -27,7 +27,6 @@
   <img id="Pretender2" class="players" src="Images/AtackerAnimation (2).gif" name="Pretender2" alt="Pretender2">
 </div> 
 
-
 	
 </div>
 	   <button onclick="Heal()">StartAnimation</button>
@@ -45,19 +44,25 @@
 <script type="text/js-worker">
 	onmessage = function (e)
 {
-				console.log(e.data.length)
-while(e.data.length < 1000)
+				console.log(e.data)
+while(true)
 		{
-			
 				if (e.data.length > 0) 
 				{
 					for(var i = 0; i < e.data.length; i++)
 					{
 						console.log(e.data[i].length)
+						
 					}
 				} 
 		}
 }
+
+
+
+
+
+
 </script>
 <script type="text/javascript">
 var queue=[]
@@ -80,8 +85,6 @@ window.onbeforeunload = function(){
   else
     console.log("Local Storage Not Supported")
 })();
-
-	
 
 		}
 
