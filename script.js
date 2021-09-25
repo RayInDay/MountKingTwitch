@@ -1,3 +1,6 @@
+
+
+
 var CurrentChampion= {}
 CurrentChampion.Hp= 10;
 CurrentChampion.Name="Basic";
@@ -121,31 +124,81 @@ document.getElementsByClassName("move")[1].style= "display: block"
 document.getElementsByClassName("move")[1].style.animation = "first-jump 1s ease-in-out forwards"; 
 setTimeout(()=>SetFirst(CurrentChampion), 1300);
 
-/*QueueWorker();
-*/function AddPlayer(){
+function AddPlayer(){
+	  let Player= {}
+	  Player.id = 6;
+	  Player.username = "sckd1pocks";
+	  Player.subPlan = 4;
 
-	let Player= {}
-	Player.username = "sckd1pocks1";
-	Player.subPlan = 4;
+	  window.indexedDB = window.indexedDB;
+	  
+	var db;
+	var playerStore;
+	var requestDB =  indexedDB.open("TestDb");
 
-let name = Player.username;
+												 	
+	requestDB.onerror = function(event) {
+		db = event.target.result;
+		console.log("error")
+	  };
 
-localStorage.setItem(Player, JSON.stringify(Player))
+	requestDB.onsuccess = function(event) {
+	db = event.target.result;
+	let tx = db.transaction('players', 'readwrite');
 
-let queue = []
-queue.push(Player)
+	tx.objectStore('players').add(Player);
 
-console.log(queue)
-var val = (localStorage)
-//TODO: Create implementation of queue with autoimplemeting player value if he donate more tham once 
+		tx.onerror = function(event){
+			console.log("Error" + event.target)
+		}	
 
-for(let i=0; i<localStorage.length; i++) {
-   key = localStorage.key(i);
-  console.log( `${key}: ${localStorage.getItem(key)}`);
+		tx.onsuccess = function(event){
+			console.log("successfuly")
+		}
+		
+	  };
+	  
 
-}
-			   // document.worker.postMessage(JSON.stringify(val))
-				console.log(JSON.parse(JSON.stringify(val.length)))
+	 
+
+	  requestDB.onupgradeneeded = function(event) 
+	  {
+	   db = event.target.result;
+		console.log("upgrade");
+	  if (!db.objectStoreNames.contains("players") ) {
+
+		//Add to indexDB
+		playerStore = db.createObjectStore("players", { keyPath: "id" });
+		playerStore.createIndex("username", "username", { unique: false });
+		playerStore.createIndex("subPlan", "subPlan", { unique: false });
+	  
+	  }
+
+
+	  };
+
+	// 	objectStore.transaction.oncomplete = function(event) 
+	// 	{
+	// 		console.log("all done");
+
+	// 		Player.forEach(function(playersFunc) {
+	// 		objectStore.add(playersFunc);
+	
+	// 			objectStore.get("0").onsuccess = function(event) {
+	// 			console.log("Name for SSN 0 is " + event.target.result.name);
+	// 		};
+	// 	});
+	// 	};
+	let queue = []
+	queue.push(Player)
+
+
+	
+
+
+
+			    document.worker.postMessage('')
+				console.log(queue)
 
 
 }

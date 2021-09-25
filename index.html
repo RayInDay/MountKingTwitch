@@ -44,17 +44,36 @@
 <script type="text/js-worker">
 	onmessage = function (e)
 {
-				console.log(e.data)
-while(true)
+		
+	requestDB = indexedDB.open("TestDb");
+
+	requestDB.onsuccess = function(event) {
+		db = event.target.result;
+		let tx = db.transaction('players', 'readwrite');
+
+		let store = tx.objectStore('players');
+		let GetResult = store.getAll();
+
+		GetResult.onerror = function(event){
+			console.log("Error")
+		}	
+
+		GetResult.onsuccess = function(queue){
+			console.log("Ебать колотить работает")
+			console.log(event.target.result)
+		}
+
+
+	}
+		while(true)
 		{
-				if (e.data.length > 0) 
-				{
-					for(var i = 0; i < e.data.length; i++)
-					{
-						console.log(e.data[i].length)
-						
-					}
-				} 
+			//setInterval(function(){},1000)
+
+			while(queue.length > 0)
+			{
+				queue.shift()
+				console.log(localStorage.getItem("queue"))
+			} 
 		}
 }
 
@@ -70,6 +89,7 @@ var Player= {username: "Nika"}
 Player.username = "Nika"
 
 
+
  document.worker = new Worker(window.URL.createObjectURL(new Blob(Array.prototype.map.call(document.querySelectorAll('script[ type= \'text\/js-worker\']'),
 
  	function (oScript){return oScript.textContent;}),{type: 'text/javascript'})));
@@ -80,10 +100,9 @@ window.onbeforeunload = function(){
 
 		window.onload = function(){
 			(function() {
-  if(window.localStorage)
-    console.log("Local Storage Supported")
-  else
-    console.log("Local Storage Not Supported")
+				
+  if(window.indexedDB)
+    console.log("Local IndeDB Supported")
 })();
 
 		}
