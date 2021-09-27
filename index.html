@@ -1,113 +1,118 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="utf-8" />
+    <title>MountainKing</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="main">
+      <img
+        src="Images/Mountain.png"
+        style="width: 50%; height: 50%; margin-top: 10%"
+      />
 
-	<meta charset="utf-8">
-	<title>MountainKing</title>
-	<link href="style.css" rel="stylesheet">
-</head>
-<body>
-<div class="main">
+      <div class="move" style="display: none">
+        <span id="HPPretender1"> 10 </span>
 
-	<img src="Images/Mountain.png" style="width: 50%; height: 50%; margin-top: 10%;" />
+        <span id="NamePretender1"> Name </span>
+        <img
+          id="Pretender1"
+          class="players"
+          src="Images/IdleAnimation (2).gif"
+          name="Pretender1"
+          alt="Pretender1"
+        />
+      </div>
 
-	<div class="move" style="display: none; ">
-  <span id="HPPretender1">
-  	10
-  </span>
+      <div class="move" style="display: none">
+        <img
+          id="Pretender2"
+          class="players"
+          src="Images/AtackerAnimation (2).gif"
+          name="Pretender2"
+          alt="Pretender2"
+        />
+      </div>
+    </div>
+    <button onclick="Heal()">StartAnimation</button>
+    <button onclick="Lose()">Lose</button>
+    <button onclick="Win()">Win</button>
+    <button onclick="AddPlayer()">Queue</button>
 
-<span id="NamePretender1">
-  	Name 
-  </span>
-  <img id="Pretender1" class="players" src="Images/IdleAnimation (2).gif" name="Pretender1" alt="Pretender1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="config.js"></script>
 
-</div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"
+      id="socketIo"
+    ></script>
+  </body>
 
-<div class="move" style="display: none ">
-  <img id="Pretender2" class="players" src="Images/AtackerAnimation (2).gif" name="Pretender2" alt="Pretender2">
-</div> 
-
-	
-</div>
-	   <button onclick="Heal()">StartAnimation</button>
-	   <button onclick="Lose()">Lose</button>
-	   <button onclick="Win()">Win</button>
-	   <button onclick="AddPlayer()">Queue</button>
-	   
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="config.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js" id="socketIo"></script>
-</body>
-
-<script type="text/js-worker">
+  <script type="text/js-worker">
 	onmessage = function (e)
-{
-		
-	requestDB = indexedDB.open("TestDb");
-
-	requestDB.onsuccess = function(event) {
-		db = event.target.result;
-		let tx = db.transaction('players', 'readwrite');
-
-		let store = tx.objectStore('players');
-		let GetResult = store.getAll();
-
-		GetResult.onerror = function(event){
-			console.log("Error")
-		}	
-
-		GetResult.onsuccess = function(queue){
-			console.log("Ебать колотить работает")
-			console.log(event.target.result)
-		}
+	{
+		let queues;
+		requestDB = indexedDB.open("TestDb");
 
 
+			requestDB.onsuccess = function(event) {
+				db = event.target.result;
+				let tx = db.transaction('players', 'readwrite');
+
+				let store = tx.objectStore('players');
+				let GetResult = store.getAll();
+
+				GetResult.onerror = function(event){
+					console.log("Error")
+				}
+
+				GetResult.onsuccess = function(queue){
+					console.log("Successful")
+					queues = queue.target.result;
+					console.log(queues);
+
+					while (true) {
+						while (queues > 0) {
+						console.log("1");
+						}
+					}
+			}
 	}
-		while(true)
-		{
-			//setInterval(function(){},1000)
-
-			while(queue.length > 0)
-			{
-				queue.shift()
-				console.log(localStorage.getItem("queue"))
-			} 
-		}
 }
+  </script>
+  <script type="text/javascript">
+    var queue = [];
+    var Player = { username: "Nika" };
+    Player.username = "Nika";
 
 
+    document.worker = new Worker(
+      window.URL.createObjectURL(
+        new Blob(
+          Array.prototype.map.call(
+            document.querySelectorAll("script[ type= 'text\/js-worker']"),
 
+            function (oScript) {
+              return oScript.textContent;
+            }
+          ),
+          { type: "text/javascript" }
+        )
+      )
+    );
 
+    window.onbeforeunload = function () {
+      document.worker.terminate();
+    };
 
+    window.onload = function () {
+      (function () {
+        if (window.indexedDB) console.log("Local IndeDB Supported");
+      })();
+    };
 
-</script>
-<script type="text/javascript">
-var queue=[]
-var Player= {username: "Nika"}
-Player.username = "Nika"
-
-
-
- document.worker = new Worker(window.URL.createObjectURL(new Blob(Array.prototype.map.call(document.querySelectorAll('script[ type= \'text\/js-worker\']'),
-
- 	function (oScript){return oScript.textContent;}),{type: 'text/javascript'})));
-
-window.onbeforeunload = function(){
-	document.worker.terminate();
-}
-
-		window.onload = function(){
-			(function() {
-				
-  if(window.indexedDB)
-    console.log("Local IndeDB Supported")
-})();
-
-		}
-
-				/*socket = io('wss://socket.donationalerts.ru:443', {
+    /*socket = io('wss://socket.donationalerts.ru:443', {
 				reconnection: true,
 				reconnectionDelayMax: 5000,
 				reconnectionDelay: 1000,
@@ -164,8 +169,6 @@ window.onbeforeunload = function(){
 	
 			});
 */
-</script>
-<script type="text/javascript" src="script.js"></script>
-
-
+  </script>
+  <script type="text/javascript" src="script.js"></script>
 </html>

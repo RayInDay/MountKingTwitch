@@ -126,15 +126,20 @@ setTimeout(()=>SetFirst(CurrentChampion), 1300);
 
 function AddPlayer(){
 	  let Player= {}
-	  Player.id = 6;
+	  Player.id = 1;
 	  Player.username = "sckd1pocks";
 	  Player.subPlan = 4;
 
-	  window.indexedDB = window.indexedDB;
+	  let queue = [];
+	  for (let i = 0; i < 10; i++) {
+		  queue.push(Player);
+	  }
+	console.log(queue);
+	window.indexedDB = window.indexedDB;
 	  
 	var db;
 	var playerStore;
-	var requestDB =  indexedDB.open("TestDb");
+	var requestDB =  indexedDB.open("TestDb" , 3);
 
 												 	
 	requestDB.onerror = function(event) {
@@ -146,7 +151,7 @@ function AddPlayer(){
 	db = event.target.result;
 	let tx = db.transaction('players', 'readwrite');
 
-	tx.objectStore('players').add(Player);
+	tx.objectStore('players').add(queue);
 
 		tx.onerror = function(event){
 			console.log("Error" + event.target)
@@ -158,9 +163,6 @@ function AddPlayer(){
 		
 	  };
 	  
-
-	 
-
 	  requestDB.onupgradeneeded = function(event) 
 	  {
 	   db = event.target.result;
@@ -168,33 +170,13 @@ function AddPlayer(){
 	  if (!db.objectStoreNames.contains("players") ) {
 
 		//Add to indexDB
-		playerStore = db.createObjectStore("players", { keyPath: "id" });
+		playerStore = db.createObjectStore("players", { keyPath: "key", autoIncrement: true});
+		playerStore.createIndex("id", "id", { unique: false });
 		playerStore.createIndex("username", "username", { unique: false });
 		playerStore.createIndex("subPlan", "subPlan", { unique: false });
 	  
 	  }
-
-
 	  };
-
-	// 	objectStore.transaction.oncomplete = function(event) 
-	// 	{
-	// 		console.log("all done");
-
-	// 		Player.forEach(function(playersFunc) {
-	// 		objectStore.add(playersFunc);
-	
-	// 			objectStore.get("0").onsuccess = function(event) {
-	// 			console.log("Name for SSN 0 is " + event.target.result.name);
-	// 		};
-	// 	});
-	// 	};
-	let queue = []
-	queue.push(Player)
-
-
-	
-
 
 
 			    document.worker.postMessage('')
