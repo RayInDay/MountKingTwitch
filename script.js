@@ -134,7 +134,6 @@ function AddPlayer(){
 	  for (let i = 0; i < 10; i++) {
 		  queue.push(Player);
 	  }
-	console.log(queue);
 	window.indexedDB = window.indexedDB;
 	  
 	var db;
@@ -150,8 +149,14 @@ function AddPlayer(){
 	requestDB.onsuccess = function(event) {
 	db = event.target.result;
 	let tx = db.transaction('players', 'readwrite');
-
-	tx.objectStore('players').add(queue);
+	for (let index = 0; index < 5; index++) {
+	queue.forEach(element => {
+		tx.objectStore('players').add(element);
+	});
+	
+}
+		
+	
 
 		tx.onerror = function(event){
 			console.log("Error" + event.target)
@@ -180,7 +185,5 @@ function AddPlayer(){
 
 
 			    document.worker.postMessage('')
-				console.log(queue)
-
 
 }

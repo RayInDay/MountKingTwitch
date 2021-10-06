@@ -52,39 +52,45 @@
   <script type="text/js-worker">
 	onmessage = function (e)
 	{
-		let queues;
-		requestDB = indexedDB.open("TestDb");
+    requestDB = indexedDB.open("TestDb");
+    requestDB.onsuccess = function(event) {
+      db = event.target.result;
+      let tx = db.transaction('players', 'readwrite');
+    
+      let store = tx.objectStore('players');
+      let GetResult = store.getAll()
+      let getAllKeysRequest = store.count();
 
+      getAllKeysRequest.onsuccess = function() {
+    console.log(getAllKeysRequest.result);
+    store.delete(getAllKeysRequest.result - 1);
 
-			requestDB.onsuccess = function(event) {
-				db = event.target.result;
-				let tx = db.transaction('players', 'readwrite');
-
-				let store = tx.objectStore('players');
-				let GetResult = store.getAll();
-
-				GetResult.onerror = function(event){
-					console.log("Error")
-				}
-
-				GetResult.onsuccess = function(queue){
-					console.log("Successful")
-					queues = queue.target.result;
-					console.log(queues);
-
-					while (true) {
-						while (queues > 0) {
-						console.log("1");
-						}
-					}
-			}
-	}
 }
+      
+      GetResult.onerror = function(event){
+        console.log("Error")
+      }
+    
+      GetResult.onsuccess = function(queue){
+
+        console.log("Successful");
+        console.log(queue.target.result);
+
+        // 	while (queues > 0) {
+        //     store.delete()
+        // 	console.log("1");
+        // }
+    }
+    }
+}
+  
   </script>
   <script type="text/javascript">
     var queue = [];
     var Player = { username: "Nika" };
     Player.username = "Nika";
+
+
 
 
     document.worker = new Worker(
@@ -101,7 +107,8 @@
         )
       )
     );
-
+		
+	
     window.onbeforeunload = function () {
       document.worker.terminate();
     };
